@@ -9,7 +9,7 @@ import reactor.core.publisher.Mono;
 
 import java.util.Optional;
 
-@Tag(name = "Games")
+@Tag(name = "Game")
 @RestController
 public class GameController {
     private final WebClient client = WebClient.create();
