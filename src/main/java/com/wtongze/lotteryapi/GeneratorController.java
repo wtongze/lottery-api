@@ -2,8 +2,6 @@ package com.wtongze.lotteryapi;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.media.ExampleObject;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,9 +41,7 @@ public class GeneratorController {
                     List<Integer> redBall = generator.intBetween(1, 27);
                     result = Stream.of(whiteBalls, redBall).flatMap(Collection::stream).toList();
                 }
-                case FANTASY_5 -> {
-                    result = generator.intBetween(5, 39);
-                }
+                case FANTASY_5 -> result = generator.intBetween(5, 39);
             }
             res.results.add(result);
         }
