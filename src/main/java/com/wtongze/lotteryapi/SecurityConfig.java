@@ -17,12 +17,15 @@ import reactor.core.publisher.Mono;
 @Configuration
 @EnableWebFluxSecurity
 public class SecurityConfig {
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
+
+    private final SecurityContextRepo securityContextRepository;
 
     @Autowired
-    private SecurityContextRepo securityContextRepository;
-
+    public SecurityConfig(AuthenticationManager authenticationManager, SecurityContextRepo securityContextRepository) {
+        this.authenticationManager = authenticationManager;
+        this.securityContextRepository = securityContextRepository;
+    }
 
     @Bean
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
