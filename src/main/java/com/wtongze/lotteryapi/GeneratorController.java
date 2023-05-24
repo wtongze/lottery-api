@@ -35,6 +35,8 @@ public class GeneratorController {
                     result = Stream.of(whiteBalls, redBall).flatMap(Collection::stream).toList();
                 }
                 case FANTASY5 -> result = generator.intBetween(5, 39);
+                case DAILY3 -> result = generator.intBetween(3, 0, 9);
+                case DAILY4 -> result = generator.intBetween(4, 0, 9);
             }
             res.results.add(result);
         }
