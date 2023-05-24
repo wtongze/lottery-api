@@ -1,7 +1,9 @@
 package com.wtongze.lotteryapi;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.core.userdetails.MapReactiveUserDetailsService;
@@ -10,10 +12,18 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.server.SecurityWebFilterChain;
+import reactor.core.publisher.Mono;
 
 @Configuration
 @EnableWebFluxSecurity
 public class SecurityConfig {
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private SecurityContextRepo securityContextRepository;
+
+
     @Bean
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
         http
@@ -28,7 +38,16 @@ public class SecurityConfig {
                         .anyExchange()
                         .authenticated())
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
-                .httpBasic(ServerHttpSecurity.HttpBasicSpec::disable);
+                .httpBasic(ServerHttpSecurity.HttpBasicSpec::disable)
+                .exceptionHandling(e ->
+                        e.authenticationEntryPoint((swe, err) ->
+                                Mono.fromRunnable(() -> swe.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED))
+                        ).accessDeniedHandler((swe, err) ->
+                                Mono.fromRunnable(() -> swe.getResponse().setStatusCode(HttpStatus.FORBIDDEN))
+                        )
+                )
+                .authenticationManager(authenticationManager)
+                .securityContextRepository(securityContextRepository);
         return http.build();
     }
 
