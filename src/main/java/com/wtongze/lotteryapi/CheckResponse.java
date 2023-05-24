@@ -6,7 +6,7 @@ import java.util.Date;
 
 @Data
 public class CheckResponse {
-    public String gameName;
+    public DrawGame gameName;
     public String rejectReason;
     public String serialNumber;
     public String status;

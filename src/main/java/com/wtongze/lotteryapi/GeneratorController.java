@@ -29,12 +29,12 @@ public class GeneratorController {
                     List<Integer> redBall = generator.intBetween(1, 26);
                     result = Stream.of(whiteBalls, redBall).flatMap(Collection::stream).toList();
                 }
-                case SUPERLOTTO_PLUS -> {
+                case SUPERLOTTO -> {
                     List<Integer> whiteBalls = generator.intBetween(5, 47);
                     List<Integer> redBall = generator.intBetween(1, 27);
                     result = Stream.of(whiteBalls, redBall).flatMap(Collection::stream).toList();
                 }
-                case FANTASY_5 -> result = generator.intBetween(5, 39);
+                case FANTASY5 -> result = generator.intBetween(5, 39);
             }
             res.results.add(result);
         }
