@@ -1,10 +1,12 @@
 package com.wtongze.lotteryapi;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
 
 import java.util.Optional;
@@ -18,14 +20,38 @@ public class GameController {
     public Mono<DrawGamesResponse> getGames(@RequestParam Optional<Integer> count) {
         return client
                 .get()
-                .uri(url ->
-                    url.scheme("https")
+                .uri(uri ->
+                    uri.scheme("https")
                             .host("calservice.calottery.com")
                             .path("/api/v1.5/drawgames")
                             .queryParam("drawscount", count.orElse(22))
                             .build()
                 )
-                .header("user-agent", "CA Lottery/3.9.0 (com.calottery.calottery; build:190; iOS 16.4.1) Alamofire/5.3.0")
-                .retrieve().bodyToMono(DrawGamesResponse.class);
+                .headers(Config.setUserAgent)
+                .retrieve()
+                .bodyToMono(DrawGamesResponse.class);
+    }
+
+    @PostMapping("/check")
+    public Mono<CheckResponse> checkTicket(@ModelAttribute Inquire inquire) {
+        if (inquire.ticketSerialNumber == null || inquire.ticketSerialNumber.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+        return client
+                .post()
+                .uri(uri ->
+                    uri.scheme("https")
+                            .host("draw-mobile.calottery.com")
+                            .path("/api/v2/draw-games/tickets/inquire")
+                            .build()
+                )
+                .headers(Config.setAll)
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(inquire)
+                .retrieve()
+                .onStatus(HttpStatusCode::is4xxClientError, e -> {
+                    throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+                })
+                .bodyToMono(CheckResponse.class);
     }
 }
