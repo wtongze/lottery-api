@@ -50,7 +50,8 @@ public class SecurityConfig {
                         )
                 )
                 .authenticationManager(authenticationManager)
-                .securityContextRepository(securityContextRepository);
+                .securityContextRepository(securityContextRepository)
+                .requestCache(ServerHttpSecurity.RequestCacheSpec::disable);
         return http.build();
     }
 
