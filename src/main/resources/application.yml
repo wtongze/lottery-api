@@ -4,6 +4,4 @@ springdoc:
 jwt:
   secret: "this_is_a_secret"
 game:
-  endpoint:
-    draw: "calservice.calottery.com"
-    check: "draw-mobile.calottery.com"
+  endpoint: "lottery-proxy.wtongze.com"

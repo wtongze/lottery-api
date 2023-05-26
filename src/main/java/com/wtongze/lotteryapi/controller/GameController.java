@@ -24,11 +24,8 @@ import java.util.Optional;
 @SecurityRequirement(name = "JWT")
 @RestController
 public class GameController {
-    @Value("${game.endpoint.draw}")
-    private String drawEndpoint;
-
-    @Value("${game.endpoint.check}")
-    private String checkEndpoint;
+    @Value("${game.endpoint}")
+    private String endpoint;
     private final WebClient client = WebClient.create();
 
     @GetMapping("/games")
@@ -41,8 +38,8 @@ public class GameController {
                 .get()
                 .uri(uri ->
                         uri.scheme("https")
-                                .host(drawEndpoint)
-                                .path("/api/v1.5/drawgames")
+                                .host(endpoint)
+                                .path("/draw/api/v1.5/drawgames")
                                 .queryParam("drawscount", count.orElse(22))
                                 .build()
                 )
@@ -70,8 +67,8 @@ public class GameController {
                 .post()
                 .uri(uri ->
                         uri.scheme("https")
-                                .host(checkEndpoint)
-                                .path("/api/v2/draw-games/tickets/inquire")
+                                .host(endpoint)
+                                .path("/check/api/v2/draw-games/tickets/inquire")
                                 .build()
                 )
                 .headers(HeaderConfig.setAll)
