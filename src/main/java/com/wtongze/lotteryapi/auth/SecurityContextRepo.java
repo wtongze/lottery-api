@@ -1,4 +1,4 @@
-package com.wtongze.lotteryapi;
+package com.wtongze.lotteryapi.auth;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.ReactiveAuthenticationManager;

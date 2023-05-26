@@ -1,5 +1,8 @@
-package com.wtongze.lotteryapi;
+package com.wtongze.lotteryapi.controller;
 
+import com.wtongze.lotteryapi.data.AuthenticationRequest;
+import com.wtongze.lotteryapi.data.AuthenticationResponse;
+import com.wtongze.lotteryapi.auth.JsonWebTokenUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;

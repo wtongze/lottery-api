@@ -1,4 +1,4 @@
-package com.wtongze.lotteryapi;
+package com.wtongze.lotteryapi.data;
 
 import org.springframework.http.HttpHeaders;
 import java.util.Map;
@@ -7,7 +7,7 @@ import java.util.function.Consumer;
 
 import static java.util.Map.entry;
 
-public class Config {
+public class HeaderConfig {
     private static final Map<String, String> headersMap = Map.ofEntries(
             entry("user-agent", "CA Lottery/3.9.0 (com.calottery.calottery; build:190; iOS 16.4.1) Alamofire/5.3.0"),
             entry("X-Originator-Id", "10002,1,I,3.9.0"),

@@ -1,4 +1,4 @@
-package com.wtongze.lotteryapi;
+package com.wtongze.lotteryapi.auth;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
 import org.springframework.security.authentication.BadCredentialsException;

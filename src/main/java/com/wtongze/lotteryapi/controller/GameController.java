@@ -1,5 +1,9 @@
-package com.wtongze.lotteryapi;
+package com.wtongze.lotteryapi.controller;
 
+import com.wtongze.lotteryapi.data.CheckRequest;
+import com.wtongze.lotteryapi.data.CheckResponse;
+import com.wtongze.lotteryapi.data.HeaderConfig;
+import com.wtongze.lotteryapi.data.DrawGamesResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -36,7 +40,7 @@ public class GameController {
                                 .queryParam("drawscount", count.orElse(22))
                                 .build()
                 )
-                .headers(Config.setUserAgent)
+                .headers(HeaderConfig.setUserAgent)
                 .retrieve()
                 .bodyToMono(DrawGamesResponse.class);
     }
@@ -64,7 +68,7 @@ public class GameController {
                                 .path("/api/v2/draw-games/tickets/inquire")
                                 .build()
                 )
-                .headers(Config.setAll)
+                .headers(HeaderConfig.setAll)
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(checkRequest)
                 .retrieve()

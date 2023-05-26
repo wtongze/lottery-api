@@ -1,5 +1,8 @@
-package com.wtongze.lotteryapi;
+package com.wtongze.lotteryapi.controller;
 
+import com.wtongze.lotteryapi.data.DrawGame;
+import com.wtongze.lotteryapi.data.Generator;
+import com.wtongze.lotteryapi.data.GeneratorResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;

@@ -1,4 +1,4 @@
-package com.wtongze.lotteryapi;
+package com.wtongze.lotteryapi.data;
 
 public enum DrawGame {
     POWERBALL,
