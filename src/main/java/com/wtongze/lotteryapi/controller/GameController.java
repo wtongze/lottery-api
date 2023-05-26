@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
@@ -23,6 +24,11 @@ import java.util.Optional;
 @SecurityRequirement(name = "JWT")
 @RestController
 public class GameController {
+    @Value("${game.endpoint.draw}")
+    private String drawEndpoint;
+
+    @Value("${game.endpoint.check}")
+    private String checkEndpoint;
     private final WebClient client = WebClient.create();
 
     @GetMapping("/games")
@@ -35,7 +41,7 @@ public class GameController {
                 .get()
                 .uri(uri ->
                         uri.scheme("https")
-                                .host("calservice.calottery.com")
+                                .host(drawEndpoint)
                                 .path("/api/v1.5/drawgames")
                                 .queryParam("drawscount", count.orElse(22))
                                 .build()
@@ -64,7 +70,7 @@ public class GameController {
                 .post()
                 .uri(uri ->
                         uri.scheme("https")
-                                .host("draw-mobile.calottery.com")
+                                .host(checkEndpoint)
                                 .path("/api/v2/draw-games/tickets/inquire")
                                 .build()
                 )

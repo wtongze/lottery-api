@@ -1,3 +1,9 @@
 springdoc:
   swagger-ui:
     tags-sorter: alpha
+jwt:
+  secret: "this_is_a_secret"
+game:
+  endpoint:
+    draw: "calservice.calottery.com"
+    check: "draw-mobile.calottery.com"

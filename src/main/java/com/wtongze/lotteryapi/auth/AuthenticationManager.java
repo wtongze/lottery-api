@@ -1,6 +1,7 @@
 package com.wtongze.lotteryapi.auth;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.ReactiveAuthenticationManager;
 import org.springframework.security.core.Authentication;
@@ -13,8 +14,12 @@ import java.util.stream.Collectors;
 
 @Component
 public class AuthenticationManager implements ReactiveAuthenticationManager {
+    private final JsonWebTokenUtils utils;
 
-    private final JsonWebTokenUtils utils = new JsonWebTokenUtils();
+    @Autowired
+    public AuthenticationManager(JsonWebTokenUtils utils) {
+        this.utils = utils;
+    }
 
     @Override
     public Mono<Authentication> authenticate(Authentication authentication) {
