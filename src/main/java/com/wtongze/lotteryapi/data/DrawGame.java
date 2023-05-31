@@ -7,7 +7,7 @@ public enum DrawGame {
     DAILY3(9),
     DAILY4(14);
 
-    private final Integer gameId;
+    public final Integer gameId;
     DrawGame(Integer gameId) {
         this.gameId = gameId;
     }

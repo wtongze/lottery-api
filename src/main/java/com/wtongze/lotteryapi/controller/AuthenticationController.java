@@ -41,7 +41,7 @@ public class AuthenticationController {
 
     @PostMapping(
             value = "/auth",
-            consumes = {MediaType.MULTIPART_FORM_DATA_VALUE}
+            consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE}
     )
     @Operation(
             summary = "Authenticate User",
