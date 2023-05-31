@@ -41,7 +41,7 @@ public class GameController {
     ) {
         Integer resultCount = count.orElse(22);
         if (game.isPresent()) {
-            return gameRepo.getGameById(game.get().gameId, resultCount);
+            return gameRepo.getGameById(game.get(), resultCount);
         }
         return gameRepo.getAllGames(resultCount);
     }

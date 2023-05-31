@@ -1,9 +1,6 @@
 package com.wtongze.lotteryapi.repo;
 
-import com.wtongze.lotteryapi.data.CheckRequest;
-import com.wtongze.lotteryapi.data.CheckResponse;
-import com.wtongze.lotteryapi.data.DrawGamesResponse;
-import com.wtongze.lotteryapi.data.HeaderConfig;
+import com.wtongze.lotteryapi.data.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -38,8 +35,8 @@ public class GameRepo {
         return getGames(null, count);
     }
 
-    public Mono<DrawGamesResponse> getGameById(Integer gameId, Integer count) {
-        return getGames(gameId, count);
+    public Mono<DrawGamesResponse> getGameById(DrawGame game, Integer count) {
+        return getGames(game.gameId, count);
     }
 
     public Mono<CheckResponse> checkTicket(String serialNumber) {
