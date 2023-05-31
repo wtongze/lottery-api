@@ -18,11 +18,15 @@ dependencies {
     testCompileOnly("org.projectlombok:lombok:1.18.26")
     testAnnotationProcessor("org.projectlombok:lombok:1.18.26")
 
+    implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("org.springframework.boot:spring-boot-starter-validation")
+
     implementation("org.springdoc:springdoc-openapi-starter-webflux-ui:2.1.0")
+    implementation("io.r2dbc:r2dbc-postgresql:0.8.13.RELEASE")
     implementation("com.auth0:java-jwt:4.4.0")
+
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.projectreactor:reactor-test")
     testImplementation("org.springframework.security:spring-security-test")

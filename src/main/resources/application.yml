@@ -1,3 +1,7 @@
+spring:
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/lottery
+    username: wtongze
 springdoc:
   swagger-ui:
     tags-sorter: alpha
